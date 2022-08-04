@@ -31,9 +31,10 @@ def main():
         del df['no need']
         result_list.append(df['after']-df['before'])
     player_num = len(csv_list) 
-    make_linegraph_1part(result_list, player_num, turn_list, title_list)
-    make_linegraph_3part(result_list, player_num, turn_list, title_list)
-    make_bargraph(result_list, player_num, turn_list, title_list) 
+    # make_linegraph_1part(result_list, player_num, turn_list, title_list)
+    # make_linegraph_3part(result_list, player_num, turn_list, title_list)
+    # make_bargraph(result_list, player_num, turn_list, title_list) 
+    make_average_linegraph(result_list, player_num, turn_list, title_list)
 
 def make_linegraph_1part(result_list, player_num, turn_list, title_list):
     #result_listは1列の表示するグラフ，player_numはプレイヤーの人数，turu_listはにおいを噴射した時間，title_listはタイトル名
@@ -71,7 +72,7 @@ def make_linegraph_1part(result_list, player_num, turn_list, title_list):
         # subplot_area[i].set_xlabel('time [minutes]')
         # subplot_area[i].set_ylabel('saliva volume [g]')
         # subplot_area[i].legend(loc = 'upper right')
-        subplot_area[i].set_ylim(0, 1.0)
+        subplot_area[i].set_ylim(0, 2.0)
         plt.tick_params(labelsize=5)
     
     plt.tight_layout()
@@ -114,10 +115,9 @@ def make_linegraph_3part(result_list, player_num, turn_list, title_list):
         subplot_area[i].set_xlabel('time [minutes]')
         subplot_area[i].set_ylabel('saliva volume [g]')
         subplot_area[i].legend(loc = 'upper right')
-        subplot_area[i].set_ylim(0, 1.0)
+        subplot_area[i].set_ylim(0, 2.0)
     plt.tight_layout()
     plt.show()
-
 
 def make_bargraph(result_list, player_num, turn_list, title_list):
     relative_list_2to3 = []
@@ -182,6 +182,28 @@ def make_bargraph(result_list, player_num, turn_list, title_list):
     plt.legend(loc = 'upper right')
     plt.show()
     
+def make_average_linegraph(result_list, player_num, turn_list, title_list):
+    #result_listは1列の表示するグラフ，player_numはプレイヤーの人数，turu_listはにおいを噴射した時間，title_listはタイトル名
+    plt.rcParams["font.size"] = 5
+    fig_1part = plt.figure()
+    subplot_area = []
+    x = ['0', '5', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']
+    separete = player_num // 3 + 1
+    # print(separete)
+    # subplot_area.append(fig_1part.add_subplot(separete, separete, i+1))
+    y = [0]*12
+    sum = [0]*12
+
+    for i in range(12):
+        for j in range(player_num):
+            sum[i] = sum[i] + result_list[j].iloc[i]
+        y[i] = sum[i]/player_num
+       
+    # print(average_list)
+
+    plt.plot(x, y, lw=1)
+    plt.legend(loc = 'upper right')
+    plt.show()
 
 if __name__ == '__main__':
     main()
