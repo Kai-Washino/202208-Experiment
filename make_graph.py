@@ -33,8 +33,8 @@ def main():
     player_num = len(csv_list) 
     # make_linegraph_1part(result_list, player_num, turn_list, title_list)
     # make_linegraph_3part(result_list, player_num, turn_list, title_list)
-    # make_bargraph(result_list, player_num, turn_list, title_list) 
-    make_average_linegraph(result_list, player_num, turn_list, title_list)
+    make_bargraph(result_list, player_num, turn_list, title_list) 
+    # make_average_linegraph(result_list, player_num, turn_list, title_list)
 
 def make_linegraph_1part(result_list, player_num, turn_list, title_list):
     #result_listは1列の表示するグラフ，player_numはプレイヤーの人数，turu_listはにおいを噴射した時間，title_listはタイトル名
