@@ -43,7 +43,6 @@ def make_linegraph_1part(result_list, player_num, turn_list, title_list):
     subplot_area = []
     x = ['0', '5', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']
     separete = player_num // 3 + 1
-    print(separete)
     # subplot_area.append(fig_1part.add_subplot(separete, separete, i+1))
 
 
@@ -162,14 +161,27 @@ def make_bargraph(result_list, player_num, turn_list, title_list):
     data_list = absolute_list #絶対値
     # data_list = relative_list_2to3 #におい噴射直後と直前の変化量
     # data_list = relative_list_2to4 #におい噴射直後の次と直前の変化量
-    print(data_list)
+    # print(data_list)
 
     
     for i in range(player_num):
         temp_data = data_list[i]
         name = temp_data.pop(0)
+
+        #検定用
+        print(temp_data[0])
+        print(',')
+        print(temp_data[1])
+        print(',')
+        print(temp_data[2])
+        # print(temp_data[0] + ',')
+        # print(temp_data[1] + ',')
+        # print(temp_data[2] + ',')
+
         pos = x - totoal_width *( 1- (2*i+1)/player_num)/2
         plt.bar(pos, temp_data, width = totoal_width/player_num, label = name)
+
+
         for j in range(3):
             average_list[j] = average_list[j] + temp_data[j]
 
@@ -180,7 +192,7 @@ def make_bargraph(result_list, player_num, turn_list, title_list):
     plt.plot(2, average_list[1]/player_num, '*',markersize=20)
     plt.plot(3, average_list[2]/player_num, '*',markersize=20)
     plt.legend(loc = 'upper right')
-    plt.show()
+    # plt.show()
     
 def make_average_linegraph(result_list, player_num, turn_list, title_list):
     #result_listは1列の表示するグラフ，player_numはプレイヤーの人数，turu_listはにおいを噴射した時間，title_listはタイトル名
